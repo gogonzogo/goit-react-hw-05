@@ -24,7 +24,7 @@ const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
+    <Route element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="movies" element={<Movies />} />
       <Route path="movies/:movieId" element={<MovieDetails />}>

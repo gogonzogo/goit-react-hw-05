@@ -10,6 +10,9 @@ const AdditionalInfoCard = ({
   reviewContent,
   isLoading,
 }) => {
+
+
+  
   return !isLoading ? (
     <li className={css.castGalleryItem}>
       {profilePath && (
