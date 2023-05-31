@@ -19,18 +19,20 @@ const RootLayout = lazy(() => import('../layouts/RootLayout/RootLayout'));
 const CastAndReviewsLayout = lazy(() =>
   import('../layouts/CastAndReviewsLayout/CastAndReviewsLayout')
 );
+const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="movies" element={<Movies />} />
-
       <Route path="movies/:movieId" element={<MovieDetails />}>
         <Route element={<CastAndReviewsLayout />} />
         <Route path="/movies/:movieId/cast" element={<Cast />} />
         <Route path="/movies/:movieId/reviews" element={<Reviews />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
