@@ -1,16 +1,42 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
+import { lazy } from 'react';
+
+const Home = lazy(() => import('../pages/Home/Home'));
+const Movies = lazy(() => import('../pages/Movies/Movies'));
+const MovieDetails = lazy(() =>
+  import('../pages/MovieDetails/MovieDetails')
+);
+const Cast = lazy(() => import('../pages/MovieDetails/Cast/Cast'));
+const Reviews = lazy(() =>
+  import('../pages/MovieDetails/Reviews/Reviews')
+);
+const RootLayout = lazy(() => import('../layouts/RootLayout/RootLayout'));
+const CastAndReviewsLayout = lazy(() =>
+  import('../layouts/CastAndReviewsLayout/CastAndReviewsLayout')
+);
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<Home />} />
+      <Route path="movies" element={<Movies />} />
+
+      <Route path="movies/:movieId" element={<MovieDetails />}>
+        <Route element={<CastAndReviewsLayout />} />
+        <Route path="/movies/:movieId/cast" element={<Cast />} />
+        <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+      </Route>
+    </Route>
+  )
+);
+
+const App = () => {
+  return <RouterProvider router={router} />;
 };
+
+export default App;
