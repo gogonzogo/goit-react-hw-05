@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/135.45e34470.chunk.css","mappings":"AAAA,mCACE,WACF","sources":["components/MovieCard/MovieCard.module.css"],"sourcesContent":[".movieGalleryItem {\n  width: 200px;\n}"],"names":[],"sourceRoot":""}
