@@ -6,30 +6,36 @@ import { useNavigate } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
 
 const MovieDetails = () => {
-  const { data, isLoading } = useTmdbData('details');
+  const { data, isLoading, error } = useTmdbData('details');
   const movie = data;
   const navigate = useNavigate();
+
+  console.log(data);
 
   const handleBackClick = () => {
     navigate(-1);
   };
 
-  return !isLoading ? (
-    <div className={css.movieDetailsContainer}>
-      <button onClick={handleBackClick}>Go Back</button>
-      <ul className={css.movieDetails}>
-        <MovieCard
-          movie={movie}
-          releaseYear={movie.release_date}
-          userScore={movie.vote_average}
-          overview={movie.overview}
-          genres={movie.genres}
-        />
-      </ul>
-      <CastAndReviewsLayout />
-    </div>
+  return !error ? (
+    !isLoading ? (
+      <div className={css.movieDetailsContainer}>
+        <button onClick={handleBackClick}>Go Back</button>
+        <ul className={css.movieDetails}>
+          <MovieCard
+            movie={movie}
+            releaseYear={movie.release_date}
+            userScore={movie.vote_average}
+            overview={movie.overview}
+            genres={movie.genres}
+          />
+        </ul>
+        <CastAndReviewsLayout />
+      </div>
+    ) : (
+      <Loader />
+    )
   ) : (
-    <Loader />
+    <h1>Sorry, no movie details for the selected movie.</h1>
   );
 };
 
