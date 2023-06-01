@@ -2,7 +2,6 @@ import css from './Cast.module.css';
 import useTmdbData from 'hooks/useTmdbData';
 import AdditionalInfoCard from 'components/AdditionalInfoCard/AdditionalInfoCard';
 import Loader from 'components/Loader/Loader';
-import { findByLabelText } from '@testing-library/react';
 
 const Cast = () => {
   const { data, isLoading, error } = useTmdbData('cast');
