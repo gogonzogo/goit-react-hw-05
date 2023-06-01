@@ -21,7 +21,6 @@ const CastAndReviewsLayout = lazy(() =>
 );
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
