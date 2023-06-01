@@ -1,5 +1,4 @@
 import css from './AdditionalInfoCard.module.css';
-import Loader from 'components/Loader/Loader';
 
 const AdditionalInfoCard = ({
   profilePath,
@@ -8,12 +7,8 @@ const AdditionalInfoCard = ({
   author,
   reviewDate,
   reviewContent,
-  isLoading,
 }) => {
-
-
-  
-  return !isLoading ? (
+  return  (
     <li className={css.castGalleryItem}>
       {profilePath && (
         <img
@@ -28,9 +23,7 @@ const AdditionalInfoCard = ({
       {reviewDate && <p className={css.castGalleryText}>{reviewDate}</p>}
       {reviewContent && <p className={css.castGalleryText}>{reviewContent}</p>}
     </li>
-  ) : (
-    <Loader />
-  );
+  ) 
 };
 
 export default AdditionalInfoCard

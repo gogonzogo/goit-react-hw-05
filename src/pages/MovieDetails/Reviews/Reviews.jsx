@@ -6,9 +6,6 @@ import Loader from 'components/Loader/Loader';
 const Reviews = () => {
   const { data, isLoading, error } = useTmdbData('reviews');
 
-  console.log(data);
-  console.log(error)
-
   return !error ? (
     !isLoading ? (
       <div className={css.reviewsDetailsContainer}>
@@ -20,6 +17,7 @@ const Reviews = () => {
               author={review.author}
               reviewData={review.created_at}
               reviewContent={review.content}
+              isLoading={isLoading}
             />
           ))}
         </ul>
