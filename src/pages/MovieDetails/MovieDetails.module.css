@@ -1,0 +1,14 @@
+.movieDetailsContainer {
+  padding: 20px;
+}
+
+.movieDetailsButton {
+  margin-bottom: 20px;
+}
+
+.movieDetailsList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 20px;
+}

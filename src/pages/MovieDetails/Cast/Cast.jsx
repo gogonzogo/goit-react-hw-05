@@ -2,6 +2,7 @@ import css from './Cast.module.css';
 import useTmdbData from 'hooks/useTmdbData';
 import AdditionalInfoCard from 'components/AdditionalInfoCard/AdditionalInfoCard';
 import Loader from 'components/Loader/Loader';
+import { findByLabelText } from '@testing-library/react';
 
 const Cast = () => {
   const { data, isLoading, error } = useTmdbData('cast');
@@ -9,9 +10,10 @@ const Cast = () => {
   return !error ? (
     !isLoading ? (
       <div className={css.castDetailsContainer}>
-        <ul className={css.castDetails}>
+        <ul className={css.castDetailsList}>
           {data.cast.map(cast => (
             <AdditionalInfoCard
+              className={css.castItem}
               key={cast.cast_id}
               profilePath={cast.profile_path}
               name={cast.name}

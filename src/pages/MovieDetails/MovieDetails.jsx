@@ -10,8 +10,6 @@ const MovieDetails = () => {
   const movie = data;
   const navigate = useNavigate();
 
-  console.log(data);
-
   const handleBackClick = () => {
     navigate(-1);
   };
@@ -19,8 +17,10 @@ const MovieDetails = () => {
   return !error ? (
     !isLoading ? (
       <div className={css.movieDetailsContainer}>
-        <button onClick={handleBackClick}>Go Back</button>
-        <ul className={css.movieDetails}>
+        <button className={css.movieDetailsButton} onClick={handleBackClick}>
+          Go Back
+        </button>
+        <ul className={css.movieDetailsList}>
           <MovieCard
             movie={movie}
             releaseYear={movie.release_date}
