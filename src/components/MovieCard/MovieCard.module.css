@@ -1,5 +1,6 @@
 .movieGalleryItem {
   display: flex;
+  cursor: pointer;
 }
 
 .movieGalleryImg {
