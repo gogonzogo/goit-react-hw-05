@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 const SearchForm = ({onSubmit}) => {
   const [userInput, setUserInput] = useState('');
+  
 
   const handleChange = (e) => {
     const query = e.target.value;

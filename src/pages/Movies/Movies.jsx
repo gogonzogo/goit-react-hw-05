@@ -3,9 +3,11 @@ import SearchForm from '../../components/SearchForm/SearchForm';
 import { useState } from 'react';
 import { useTmdbData } from 'hooks/useTmdbData';
 import MovieGallery from 'components/MovieGallery/MovieGallery';
+import { useNavigate } from 'react-router-dom';
 
 const Movies = () => {
   const [userInput, setUserInput] = useState('');
+  const navigate = useNavigate();
   const { data, isLoading, error } = useTmdbData('search', userInput);
 
   const handleSubmit = userInput => {
@@ -13,6 +15,7 @@ const Movies = () => {
       return;
     }
     setUserInput(userInput);
+    navigate(`/movies?query=${userInput}`);
   };
 
   return (

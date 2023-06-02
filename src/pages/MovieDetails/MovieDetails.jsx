@@ -1,25 +1,18 @@
 import css from './MovieDetails.module.css';
 import useTmdbData from 'hooks/useTmdbData';
+import BackButton from 'components/BackButton/BackButton';
 import MovieCard from 'components/MovieCard/MovieCard';
 import CastAndReviewsLayout from 'layouts/CastAndReviewsLayout/CastAndReviewsLayout';
-import { useNavigate } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
 
 const MovieDetails = () => {
   const { data, isLoading, error } = useTmdbData('details');
   const movie = data;
-  const navigate = useNavigate();
-
-  const handleBackClick = () => {
-    navigate(-1);
-  };
 
   return !error ? (
     !isLoading ? (
       <div className={css.movieDetailsContainer}>
-        <button className={css.movieDetailsButton} onClick={handleBackClick}>
-          Go Back
-        </button>
+        <BackButton />
         <ul className={css.movieDetailsList}>
           <MovieCard
             movie={movie}
