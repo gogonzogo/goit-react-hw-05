@@ -1,9 +1,9 @@
-import css from './CastAndReviewsLayout.module.css';
+import css from './AdditionalInfoLinks.module.css';
 import { NavLink, Outlet, useParams } from 'react-router-dom';
 import { Suspense } from 'react';
 import Loader from 'components/Loader/Loader';
 
-const CastAndReviewsLayout = () => {
+const AdditionalInfoLinks = () => {
   const { movieId } = useParams();
 
   return (
@@ -35,4 +35,4 @@ const CastAndReviewsLayout = () => {
   );
 };
 
-export default CastAndReviewsLayout;
+export default AdditionalInfoLinks;

@@ -2,7 +2,7 @@ import css from './MovieDetails.module.css';
 import useTmdbData from 'api/useTmdbData';
 import BackButton from 'components/BackButton/BackButton';
 import MovieCard from 'components/MovieCard/MovieCard';
-import CastAndReviewsLayout from 'components/CastAndReviewsLayout/CastAndReviewsLayout';
+import CastAndReviewsLayout from 'components/AdditionalInfoLinks/AdditionalInfoLinks';
 import Loader from 'components/Loader/Loader';
 
 const MovieDetails = () => {

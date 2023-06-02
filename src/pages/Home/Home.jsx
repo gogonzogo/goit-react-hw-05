@@ -1,11 +1,14 @@
-// import css from './Home.module.css';
-import Trending from "pages/Trending/Trending";
+import css from './Home.module.css';
+import useTmdbData from 'api/useTmdbData';
+import MovieGallery from 'components/MovieGallery/MovieGallery';
 
 const Home = () => {
+  const { data, isLoading } = useTmdbData(`trending`);
 
   return (
     <div>
-      <Trending />
+      <h1 className={css.trendingTitle}>Trending Today</h1>
+      <MovieGallery movies={data} isLoading={isLoading} />
     </div>
   );
 };
