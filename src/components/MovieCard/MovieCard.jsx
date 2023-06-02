@@ -1,5 +1,5 @@
 import css from './MovieCard.module.css';
-import { TMDB_API_CONFIG } from 'config/api-config';
+import { TMDB_API_CONFIG } from 'api/api-config';
 import Loader from 'components/Loader/Loader';
 
 const MovieCard = ({

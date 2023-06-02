@@ -1,5 +1,3 @@
-
-
 export const isTimeStampExpired = (timeStamp) => {
   if (!timeStamp) {
     return true;

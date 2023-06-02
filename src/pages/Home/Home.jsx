@@ -1,5 +1,5 @@
 // import css from './Home.module.css';
-import Trending from "pages/Home/Trending/Trending";
+import Trending from "pages/Trending/Trending";
 
 const Home = () => {
 

@@ -1,7 +1,7 @@
 import css from './Movies.module.css';
 import SearchForm from '../../components/SearchForm/SearchForm';
 import { useState } from 'react';
-import { useTmdbData } from 'hooks/useTmdbData';
+import { useTmdbData } from 'api/useTmdbData';
 import MovieGallery from 'components/MovieGallery/MovieGallery';
 import { useNavigate } from 'react-router-dom';
 

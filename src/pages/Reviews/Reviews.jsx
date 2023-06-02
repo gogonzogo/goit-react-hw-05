@@ -1,5 +1,5 @@
 import css from './Reviews.module.css';
-import useTmdbData from 'hooks/useTmdbData';
+import useTmdbData from 'api/useTmdbData';
 import AdditionalInfoCard from 'components/AdditionalInfoCard/AdditionalInfoCard';
 import Loader from 'components/Loader/Loader';
 

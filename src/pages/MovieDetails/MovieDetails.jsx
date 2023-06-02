@@ -1,8 +1,8 @@
 import css from './MovieDetails.module.css';
-import useTmdbData from 'hooks/useTmdbData';
+import useTmdbData from 'api/useTmdbData';
 import BackButton from 'components/BackButton/BackButton';
 import MovieCard from 'components/MovieCard/MovieCard';
-import CastAndReviewsLayout from 'layouts/CastAndReviewsLayout/CastAndReviewsLayout';
+import CastAndReviewsLayout from 'components/CastAndReviewsLayout/CastAndReviewsLayout';
 import Loader from 'components/Loader/Loader';
 
 const MovieDetails = () => {

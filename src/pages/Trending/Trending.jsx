@@ -1,5 +1,5 @@
 import css from './Trending.module.css';
-import useTmdbData from 'hooks/useTmdbData';
+import useTmdbData from 'api/useTmdbData';
 import MovieGallery from 'components/MovieGallery/MovieGallery';
 
 const Trending = () => {

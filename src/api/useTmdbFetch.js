@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { TMDB_API_CONFIG } from 'config/api-config';
-import { getCurrentTimeStamp, isTimeStampExpired } from 'utils/fetchUtils';
+import { TMDB_API_CONFIG } from 'api/api-config';
+import { getCurrentTimeStamp, isTimeStampExpired } from 'api/fetchUtils';
 
 export const useTmdbFetch = (url) => {
   const [data, setData] = useState(null);
