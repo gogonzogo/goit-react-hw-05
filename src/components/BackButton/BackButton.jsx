@@ -19,7 +19,7 @@ const BackButton = ({ onClick }) => {
     return newPath;
   };
 
-  const newPath = getBackPath();
+  // const newPath = getBackPath();
 
   return (
     <Link className={css.backButton} to={path.current}>
