@@ -19,14 +19,13 @@ const MovieDetails = () => {
       .then(data => {
         setMovieDetails(data);
       })
-      .catch(error => {
-        setError(error);
-        console.log(error);
+      .catch(err => {
+        setError(err);
       })
       .finally(() => setIsLoading(false));
   }, [movieId]);
 
-  return !error ? (
+  return movieDetails.length > 0 ? (
     !isLoading ? (
       <div className={css.movieDetailsContainer}>
         <BackButton />
@@ -37,6 +36,7 @@ const MovieDetails = () => {
             userScore={movieDetails.vote_average}
             overview={movieDetails.overview}
             genres={movieDetails.genres}
+            error={error}
           />
         </ul>
         <CastAndReviewsLayout />

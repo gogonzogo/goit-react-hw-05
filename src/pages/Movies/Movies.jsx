@@ -29,9 +29,8 @@ const Movies = () => {
         setSearchedMovies(data.results);
         setIsLoading(false);
       })
-      .catch(error => {
-        setError(error);
-        console.log(error);
+      .catch(err => {
+        setError(err);
       })
       .finally(() => setIsLoading(false));
   }, [searchParams]);
@@ -39,9 +38,9 @@ const Movies = () => {
   return (
     <div className={css.movieSearchContainer}>
       <SearchForm onSubmit={handleSubmit} />
-      {!error ? (
+      {searchedMovies.length > 0 ? (
         <>
-          <MovieGallery movies={searchedMovies} isLoading={isLoading} />{' '}
+          <MovieGallery movies={searchedMovies} isLoading={isLoading} error={error}/>{' '}
         </>
       ) : (
         <h1>No movies match search</h1>

@@ -14,9 +14,8 @@ const Home = () => {
       .then(data => {
         setTrendingMovies(data.results);
       })
-      .catch(error => {
-        setError(error);
-        console.log(error);
+      .catch(err => {
+        setError(err);
       })
       .finally(() => setIsLoading(false));
   }, []);
@@ -24,7 +23,7 @@ const Home = () => {
   return (
     <section>
       <h1 className={css.trendingTitle}>Trending Today</h1>
-      <MovieGallery movies={trendingMovies} isLoading={isLoading} />
+      <MovieGallery movies={trendingMovies} isLoading={isLoading} error={error}/>
     </section>
   );
 };

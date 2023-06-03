@@ -15,9 +15,8 @@ const Reviews = () => {
     setIsLoading(true);
     getMovieDetails(movieId, '/reviews')
       .then(data => setReviewDetails(data.results))
-      .catch(error => {
-        setError(error);
-        console.log(error);
+      .catch(err => {
+        setError(err);
       })
       .finally(() => setIsLoading(false));
   }, [movieId]);
@@ -34,6 +33,7 @@ const Reviews = () => {
               reviewData={review.created_at}
               reviewContent={review.content}
               isLoading={isLoading}
+              error={error}
             />
           ))}
         </ul>
