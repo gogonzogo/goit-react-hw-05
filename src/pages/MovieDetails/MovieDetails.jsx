@@ -25,7 +25,7 @@ const MovieDetails = () => {
       .finally(() => setIsLoading(false));
   }, [movieId]);
 
-  return movieDetails.length > 0 ? (
+  return movieDetails.length > 1 ? (
     !isLoading ? (
       <div className={css.movieDetailsContainer}>
         <BackButton />
