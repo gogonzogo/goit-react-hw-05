@@ -1,15 +1,31 @@
 import css from './Home.module.css';
-import useTmdbData from 'api/useTmdbData';
 import MovieGallery from 'components/MovieGallery/MovieGallery';
+import { getTrendingMovies } from 'api/api-fetches';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
-  const { data, isLoading } = useTmdbData(`trending`);
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getTrendingMovies()
+      .then(data => {
+        setTrendingMovies(data.results);
+      })
+      .catch(error => {
+        setError(error);
+        console.log(error);
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
 
   return (
-    <div>
+    <section>
       <h1 className={css.trendingTitle}>Trending Today</h1>
-      <MovieGallery movies={data} isLoading={isLoading} />
-    </div>
+      <MovieGallery movies={trendingMovies} isLoading={isLoading} />
+    </section>
   );
 };
 

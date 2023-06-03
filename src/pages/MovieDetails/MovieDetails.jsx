@@ -1,13 +1,30 @@
 import css from './MovieDetails.module.css';
-import useTmdbData from 'api/useTmdbData';
 import BackButton from 'components/BackButton/BackButton';
 import MovieCard from 'components/MovieCard/MovieCard';
 import CastAndReviewsLayout from 'components/AdditionalInfoLinks/AdditionalInfoLinks';
 import Loader from 'components/Loader/Loader';
+import { getMovieDetails } from 'api/api-fetches'; 
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
-  const { data, isLoading, error } = useTmdbData('details');
-  const movie = data;
+  const [movieDetails, setMovieDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    setIsLoading(true);
+    getMovieDetails(movieId, '')
+      .then(data => {
+        setMovieDetails(data);
+      })
+      .catch(error => {
+        setError(error);
+        console.log(error);
+      })
+      .finally(() => setIsLoading(false));
+  }, [movieId]);
 
   return !error ? (
     !isLoading ? (
@@ -15,11 +32,11 @@ const MovieDetails = () => {
         <BackButton />
         <ul className={css.movieDetailsList}>
           <MovieCard
-            movie={movie}
-            releaseYear={movie.release_date}
-            userScore={movie.vote_average}
-            overview={movie.overview}
-            genres={movie.genres}
+            movie={movieDetails}
+            releaseYear={movieDetails.release_date}
+            userScore={movieDetails.vote_average}
+            overview={movieDetails.overview}
+            genres={movieDetails.genres}
           />
         </ul>
         <CastAndReviewsLayout />

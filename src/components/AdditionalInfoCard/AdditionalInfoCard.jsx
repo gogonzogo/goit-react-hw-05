@@ -1,5 +1,5 @@
 import css from './AdditionalInfoCard.module.css';
-import { TMDB_API_CONFIG } from 'api/api-config';
+import { IMG_BASE_URL, CAST_IMG_PLACEHOLDER_URL } from 'api/api-config';
 
 const AdditionalInfoCard = ({
   profilePath,
@@ -9,7 +9,7 @@ const AdditionalInfoCard = ({
   reviewDate,
   reviewContent,
 }) => {
-  const { IMG_BASE_URL, CAST_IMG_PLACEHOLDER_URL } = TMDB_API_CONFIG;
+
   const CAST_IMG_URL = `${IMG_BASE_URL}${profilePath}`;
 
   const castImgUrl = profilePath => {
@@ -31,7 +31,7 @@ const AdditionalInfoCard = ({
           className={css.additionaInfoImg}
           src={castImgUrl(profilePath)}
           alt={name}
-          width="200px"
+          width="80px"
         />
       )}
       <p className={css.additionaInfoTitle}>{name || author}</p>

@@ -1,16 +1,32 @@
 import css from './Cast.module.css';
-import useTmdbData from 'api/useTmdbData';
 import AdditionalInfoCard from 'components/AdditionalInfoCard/AdditionalInfoCard';
 import Loader from 'components/Loader/Loader';
+import { getMovieDetails } from 'api/api-fetches';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const Cast = () => {
-  const { data, isLoading, error } = useTmdbData('cast');
+  const [castDetails, setCastDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { movieId } = useParams();
 
-  return !error ? (
+  useEffect(() => {
+    setIsLoading(true);
+    getMovieDetails(movieId, '/credits')
+      .then(data => setCastDetails(data.cast))
+      .catch(error => {
+        setError(error);
+        console.log(error);
+      })
+      .finally(() => setIsLoading(false));
+  }, [movieId]);
+
+  return castDetails.length > 0 ? (
     !isLoading ? (
       <div className={css.castDetailsContainer}>
         <ul className={css.castDetailsList}>
-          {data.cast.map(cast => (
+          {castDetails.map(cast => (
             <AdditionalInfoCard
               className={css.castItem}
               key={cast.cast_id}

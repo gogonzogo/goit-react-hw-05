@@ -1,5 +1,5 @@
 import css from './MovieCard.module.css';
-import { TMDB_API_CONFIG } from 'api/api-config';
+import { IMG_BASE_URL, MOVIE_IMG_PLACEHOLDER_URL } from 'api/api-config';
 import Loader from 'components/Loader/Loader';
 
 const MovieCard = ({
@@ -10,7 +10,7 @@ const MovieCard = ({
   genres,
   isLoading,
 }) => {
-  const { IMG_BASE_URL, MOVIE_IMG_PLACEHOLDER_URL } = TMDB_API_CONFIG;
+
   const MOVIE_IMG_URL = `${IMG_BASE_URL}${movie.poster_path}`;
 
   const movieImg = movie => {

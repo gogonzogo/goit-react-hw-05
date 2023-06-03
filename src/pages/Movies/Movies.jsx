@@ -1,29 +1,47 @@
 import css from './Movies.module.css';
 import SearchForm from '../../components/SearchForm/SearchForm';
-import { useState } from 'react';
-import { useTmdbData } from 'api/useTmdbData';
+import { useState, useEffect } from 'react';
 import MovieGallery from 'components/MovieGallery/MovieGallery';
-import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import { getSearchMovies } from 'api/api-fetches';
 
 const Movies = () => {
-  const [userInput, setUserInput] = useState('');
-  const navigate = useNavigate();
-  const { data, isLoading, error } = useTmdbData('search', userInput);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchedMovies, setSearchedMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleSubmit = userInput => {
     if (!userInput) {
       return;
     }
-    setUserInput(userInput);
-    navigate(`/movies?query=${userInput}`);
+    setSearchParams({ query: userInput });
   };
+
+  useEffect(() => {
+    let query = searchParams.get('query');
+    if (!query) {
+      return;
+    }
+    setIsLoading(true);
+    getSearchMovies(query)
+      .then(data => {
+        setSearchedMovies(data.results);
+        setIsLoading(false);
+      })
+      .catch(error => {
+        setError(error);
+        console.log(error);
+      })
+      .finally(() => setIsLoading(false));
+  }, [searchParams]);
 
   return (
     <div className={css.movieSearchContainer}>
       <SearchForm onSubmit={handleSubmit} />
       {!error ? (
         <>
-          <MovieGallery movies={data} isLoading={isLoading} />{' '}
+          <MovieGallery movies={searchedMovies} isLoading={isLoading} />{' '}
         </>
       ) : (
         <h1>No movies match search</h1>

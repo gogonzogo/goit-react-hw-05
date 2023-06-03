@@ -1,16 +1,32 @@
 import css from './Reviews.module.css';
-import useTmdbData from 'api/useTmdbData';
 import AdditionalInfoCard from 'components/AdditionalInfoCard/AdditionalInfoCard';
 import Loader from 'components/Loader/Loader';
+import { getMovieDetails } from 'api/api-fetches';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const Reviews = () => {
-  const { data, isLoading, error } = useTmdbData('reviews');
+  const [reviewDetails, setReviewDetails] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { movieId } = useParams();
 
-  return !error ? (
+  useEffect(() => {
+    setIsLoading(true);
+    getMovieDetails(movieId, '/reviews')
+      .then(data => setReviewDetails(data.results))
+      .catch(error => {
+        setError(error);
+        console.log(error);
+      })
+      .finally(() => setIsLoading(false));
+  }, [movieId]);
+
+  return reviewDetails.length > 0 ? (
     !isLoading ? (
       <div className={css.reviewsDetailsContainer}>
         <ul className={css.reviewsDetails}>
-          {data.results.map(review => (
+          {reviewDetails.map(review => (
             <AdditionalInfoCard
               key={review.id}
               avatarPath={review.author_details.avatar_path}

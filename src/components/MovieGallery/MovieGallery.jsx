@@ -20,7 +20,7 @@ const MovieGallery = ({ movies, isLoading }) => {
   }
   return !isLoading ? (
     <ul className={css.movieGallery} onClick={handleClick}>
-      {movies.results.map(movie => (
+      {movies.map(movie => (
         <MovieCard movie={movie} key={movie.id} isLoading={isLoading} />
       ))}
     </ul>
