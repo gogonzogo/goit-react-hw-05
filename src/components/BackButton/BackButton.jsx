@@ -6,18 +6,18 @@ const BackButton = ({ onClick }) => {
   const location = useLocation();
   const path = useRef(location?.state?.from ?? '/');
 
-  const getBackPath = () => {
-    let path = location.pathname;
-    let newPath;
+  // const getBackPath = () => {
+  //   let path = location.pathname;
+  //   let newPath;
 
-    if (path.includes('?query=')) {
-      newPath = '/movies';
-    }
-    if (path.includes('/movie')) {
-      newPath = '/';
-    }
-    return newPath;
-  };
+  //   if (path.includes('?query=')) {
+  //     newPath = '/movies';
+  //   }
+  //   if (path.includes('/movie')) {
+  //     newPath = '/';
+  //   }
+  //   return newPath;
+  // };
 
   // const newPath = getBackPath();
 
