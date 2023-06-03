@@ -25,7 +25,7 @@ const MovieDetails = () => {
       .finally(() => setIsLoading(false));
   }, [movieId]);
 
-  return movieDetails.length > 1 ? (
+  return !error ? (
     !isLoading ? (
       <div className={css.movieDetailsContainer}>
         <BackButton />
@@ -36,7 +36,6 @@ const MovieDetails = () => {
             userScore={movieDetails.vote_average}
             overview={movieDetails.overview}
             genres={movieDetails.genres}
-            error={error}
           />
         </ul>
         <CastAndReviewsLayout />
