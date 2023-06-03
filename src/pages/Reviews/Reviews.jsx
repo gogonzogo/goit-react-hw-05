@@ -6,21 +6,25 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const Reviews = () => {
+  const [data, setData] = useState(null);
   const [reviewDetails, setReviewDetails] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
 
   useEffect(() => {
     setIsLoading(true);
     getMovieDetails(movieId, '/reviews')
-      .then(data => setReviewDetails(data.results))
+      .then(data => {
+        setReviewDetails(data.results);
+        setData(data);
+      })
       .catch(err => setError(err))
       .finally(() => setIsLoading(false));
   }, [movieId]);
 
-  return !error ? (
-    !isLoading ? (
+  return !isLoading ? (
+    !error && data && reviewDetails.length > 0 ? (
       <div className={css.reviewsDetailsContainer}>
         <ul className={css.reviewsDetails}>
           {reviewDetails.map(review => (
@@ -36,10 +40,10 @@ const Reviews = () => {
         </ul>
       </div>
     ) : (
-      <Loader />
+      <h5>No reviews at this time.</h5>
     )
   ) : (
-    <h5>No reviews at this time.</h5>
+    <Loader />
   );
 };
 

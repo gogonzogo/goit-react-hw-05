@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const Cast = () => {
+  const [data, setData] = useState(null);
   const [castDetails, setCastDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,13 +15,16 @@ const Cast = () => {
   useEffect(() => {
     setIsLoading(true);
     getMovieDetails(movieId, '/credits')
-      .then(data => setCastDetails(data.cast))
+      .then(data => {
+        setCastDetails(data.cast);
+        setData(data);
+      })
       .catch(error => setError(error))
       .finally(() => setIsLoading(false));
   }, [movieId]);
 
-  return !error ? (
-    !isLoading ? (
+  return !isLoading ? (
+    !error && data && castDetails.length > 0 ? (
       <div className={css.castDetailsContainer}>
         <ul className={css.castDetailsList}>
           {castDetails.map(cast => (
@@ -37,10 +41,10 @@ const Cast = () => {
         </ul>
       </div>
     ) : (
-      <Loader />
+      <h5>Sorry, no cast details at this time.</h5>
     )
   ) : (
-    <h5>Sorry, no cast details at this time.</h5>
+    <Loader />
   );
 };
 
