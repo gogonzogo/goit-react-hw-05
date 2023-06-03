@@ -10,6 +10,7 @@ const Movies = () => {
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [searchComplete, setSearchComplete] = useState(false);
 
   const handleSubmit = userInput => {
     if (!userInput) {
@@ -25,25 +26,23 @@ const Movies = () => {
     }
     setIsLoading(true);
     getSearchMovies(query)
-      .then(data => {
-        setSearchedMovies(data.results);
+      .then(data => setSearchedMovies(data.results))
+      .catch(err => setError(err))
+      .finally(() => {
         setIsLoading(false);
-      })
-      .catch(err => {
-        setError(err);
-      })
-      .finally(() => setIsLoading(false));
+        setSearchComplete(true);
+      });
   }, [searchParams]);
 
   return (
     <div className={css.movieSearchContainer}>
       <SearchForm onSubmit={handleSubmit} />
-      {searchedMovies.length > 0 ? (
-        <>
-          <MovieGallery movies={searchedMovies} isLoading={isLoading} error={error}/>{' '}
-        </>
-      ) : (
+      {searchComplete && searchedMovies.length < 1 && !error ? (
         <h1>No movies match search</h1>
+      ) : (
+        <>
+          <MovieGallery movies={searchedMovies} isLoading={isLoading} />
+        </>
       )}
     </div>
   );

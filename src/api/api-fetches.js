@@ -12,7 +12,6 @@ export const getMovieDetails = async (movieId, details) => {
   const { data } = await axios.get(
     `movie/${movieId}${details}?api_key=${API_KEY}`
   );
-  console.log(data)
   return data;
 };
 

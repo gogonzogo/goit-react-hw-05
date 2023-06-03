@@ -15,13 +15,11 @@ const Reviews = () => {
     setIsLoading(true);
     getMovieDetails(movieId, '/reviews')
       .then(data => setReviewDetails(data.results))
-      .catch(err => {
-        setError(err);
-      })
+      .catch(err => setError(err))
       .finally(() => setIsLoading(false));
   }, [movieId]);
 
-  return reviewDetails.length > 0 ? (
+  return !error ? (
     !isLoading ? (
       <div className={css.reviewsDetailsContainer}>
         <ul className={css.reviewsDetails}>
@@ -33,7 +31,6 @@ const Reviews = () => {
               reviewData={review.created_at}
               reviewContent={review.content}
               isLoading={isLoading}
-              error={error}
             />
           ))}
         </ul>

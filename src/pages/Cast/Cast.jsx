@@ -15,14 +15,11 @@ const Cast = () => {
     setIsLoading(true);
     getMovieDetails(movieId, '/credits')
       .then(data => setCastDetails(data.cast))
-      .catch(error => {
-        setError(error);
-        console.log(error);
-      })
+      .catch(error => setError(error))
       .finally(() => setIsLoading(false));
   }, [movieId]);
 
-  return castDetails.length > 0 ? (
+  return !error ? (
     !isLoading ? (
       <div className={css.castDetailsContainer}>
         <ul className={css.castDetailsList}>
